@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
-import Input from "../../ui/Input";
+// import Input from "../../ui/Input";
 import Form from "../../ui/Form";
-import Button from "../../ui/Button";
+// import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
+import { useForm } from "react-hook-form";
 
 const FormRow = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 24rem 1fr 1.2fr;
+  grid-template-columns: 24rem 1fr;
   gap: 2.4rem;
 
   padding: 1.2rem 0;
@@ -43,44 +44,50 @@ const Error = styled.span`
 `;
 
 function CreateCabinForm() {
+  const { register, handleSubmit } = useForm()
+
+  function onSubmitFn(data) {
+    console.log(data);
+  }
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmitFn)}>
       <FormRow>
-        <Label htmlFor="name">Cabin name</Label>
-        <Input type="text" id="name" />
+        <label htmlFor="name">Cabin name</label>
+        <input className="border-2 -border--color-grey-200 rounded-lg py-2 px-4" {...register('name')} type="text" id="name" />
       </FormRow>
 
       <FormRow>
-        <Label htmlFor="maxCapacity">Maximum capacity</Label>
-        <Input type="number" id="maxCapacity" />
+        <label htmlFor="maxCapacity">Maximum capacity</label>
+        <input className="border-2 -border--color-grey-200 rounded-lg py-2 px-4" {...register('maxCapacity')} type="number" id="maxCapacity" />
       </FormRow>
 
       <FormRow>
-        <Label htmlFor="regularPrice">Regular price</Label>
-        <Input type="number" id="regularPrice" />
+        <label htmlFor="regularPrice">Regular price</label>
+        <input className="border-2 -border--color-grey-200 rounded-lg py-2 px-4" {...register('regularPrice')} type="number" id="regularPrice" />
       </FormRow>
 
       <FormRow>
-        <Label htmlFor="discount">Discount</Label>
-        <Input type="number" id="discount" defaultValue={0} />
+        <label htmlFor="discount">Discount</label>
+        <input className="border-2 -border--color-grey-200 rounded-lg py-2 px-4" {...register('discount')} type="number" id="discount" defaultValue={0} />
       </FormRow>
 
       <FormRow>
-        <Label htmlFor="description">Description for website</Label>
-        <Textarea type="number" id="description" defaultValue="" />
+        <label htmlFor="description">Description for website</label>
+        <textarea {...register('description')} className="border-2 -border--color-grey-200 rounded-lg py-2 px-4 w-full resize-none" id="description" defaultValue="" />
       </FormRow>
 
       <FormRow>
-        <Label htmlFor="image">Cabin photo</Label>
-        <FileInput id="image" accept="image/*" />
+        <label htmlFor="image">Cabin photo</label>
+        <FileInput className="border-2 -border--color-grey-200 rounded-lg py-2 px-4" id="image" accept="image/*" />
       </FormRow>
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <button className="rounded-lg px-5 py-3 -text--color-grey-600 border-2 -border--color-grey-200 hover:-bg--color-grey-50" variation="secondary" type="reset">
           Cancel
-        </Button>
-        <Button>Edit cabin</Button>
+        </button>
+        <button className="rounded-lg px-5 py-3 -text--color-brand-50 -bg--color-brand-600 hover:-bg--color-brand-700">Edit cabin</button>
       </FormRow>
     </Form>
   );

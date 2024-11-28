@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { formatCurrency } from "../../utils/helpers";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteCabin } from "../../services/apiCabin";
+import { toast } from "react-hot-toast";
 
 const TableRow = styled.div`
   display: grid;
@@ -38,3 +42,35 @@ const Discount = styled.div`
   font-weight: 500;
   color: var(--color-green-700);
 `;
+
+export default function CabinRow({ cabin }) {
+  const { id: cabinId, name, maxCapacity, regularPrice, discount, image } = cabin
+
+  const queryClient = useQueryClient()
+
+  const { mutate, isPending, data, } = useMutation({
+    mutationFn: deleteCabin,
+    onSuccess: () => {
+      toast.success('Cabin successfully deleted')
+      queryClient.invalidateQueries({
+        queryKey: ['cabin']
+      })
+    },
+    onError: err => toast.error(err.message)
+  })
+
+  return (
+    <div className={`grid grid-cols-6 gap-y-9 items-center justify-items-center py-6 px-10 border-b -border--color-grey-200 ${isPending == true ? 'opacity-50' : ''}`}>
+      <img className="block w-[6.4rem] aspect-video object-cover object-center scale-150 -translate-x-2" src={image} />
+      <div className="text-2xl -text--color-grey-600 sono-600">{name}</div>
+      <div className="text-center">Fix up to {maxCapacity} guests</div>
+      <div className="sono-600">{formatCurrency(regularPrice)}</div>
+      <div className="sono-600 -text--color-green-700">{formatCurrency(discount)}</div>
+      <button
+        disabled={isPending}
+        onClick={() => mutate(cabinId)}
+        className="-text--color-red-700 -bg--color-red-700 bg-opacity-10 px-2 rounded-2xl"
+      >{isPending == true ? 'Deleting..' : 'Delete'}</button>
+    </div>
+  )
+}
