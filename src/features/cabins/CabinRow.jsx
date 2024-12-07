@@ -3,6 +3,8 @@ import { formatCurrency } from "../../utils/helpers";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCabin } from "../../services/apiCabin";
 import { toast } from "react-hot-toast";
+import { useState } from "react";
+import CreateCabinForm from "./CreateCabinForm";
 
 const TableRow = styled.div`
   display: grid;
@@ -44,6 +46,8 @@ const Discount = styled.div`
 `;
 
 export default function CabinRow({ cabin }) {
+  const [showEditForm, setShowEditForm] = useState(false)
+
   const { id: cabinId, name, maxCapacity, regularPrice, discount, image } = cabin
 
   const queryClient = useQueryClient()
@@ -60,17 +64,28 @@ export default function CabinRow({ cabin }) {
   })
 
   return (
-    <div className={`grid grid-cols-6 gap-y-9 items-center justify-items-center py-6 px-10 border-b -border--color-grey-200 ${isPending == true ? 'opacity-50' : ''}`}>
-      <img className="block w-[6.4rem] aspect-video object-cover object-center scale-150 -translate-x-2" src={image} />
-      <div className="text-2xl -text--color-grey-600 sono-600">{name}</div>
-      <div className="text-center">Fix up to {maxCapacity} guests</div>
-      <div className="sono-600">{formatCurrency(regularPrice)}</div>
-      <div className="sono-600 -text--color-green-700">{formatCurrency(discount)}</div>
-      <button
-        disabled={isPending}
-        onClick={() => mutate(cabinId)}
-        className="-text--color-red-700 -bg--color-red-700 bg-opacity-10 px-2 rounded-2xl"
-      >{isPending == true ? 'Deleting..' : 'Delete'}</button>
-    </div>
+    <>
+      <div className={`grid grid-cols-6 gap-y-9 items-center justify-items-center py-6 px-10 border-b -border--color-grey-200 ${isPending == true ? 'opacity-50' : ''}`}>
+        <img className="block w-[6.4rem] aspect-video object-cover object-center scale-150 -translate-x-2" src={image} />
+        <div className="text-2xl -text--color-grey-600 sono-600">{name}</div>
+        <div className="text-center">Fix up to {maxCapacity} guests</div>
+        <div className="sono-600">{formatCurrency(regularPrice)}</div>
+        <div className="sono-600 -text--color-green-700">{formatCurrency(discount)}</div>
+        <div className="flex flex-col gap-1 text-base">
+          <button
+            disabled={isPending}
+            onClick={() => mutate(cabinId)}
+            className="-bg--color-red-700 px-3 py-1 rounded-lg text-white hover:-bg--color-red-800 transitionOptimazed"
+          >{isPending == true ? 'Deleting..' : 'Delete'}</button>
+          <button
+            onClick={() => setShowEditForm(e => !e)}
+            className="-text--color-grey-700 px-3 py-1 rounded-lg -bg--color-grey-100 hover:-bg--color-grey-200 transitionOptimazed"
+          >Edit cabin</button>
+        </div>
+      </div>
+      {
+        showEditForm && <CreateCabinForm setShowForm={setShowEditForm} cabinToAdd={cabin} />
+      }
+    </>
   )
 }

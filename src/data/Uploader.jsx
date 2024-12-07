@@ -35,7 +35,7 @@ async function createGuests() {
   if (error) console.log(error.message);
 }
 
-async function createCabins() {
+async function createEditCabins() {
   const { error } = await supabase.from("cabins").insert(cabins);
   if (error) console.log(error.message);
 }
@@ -112,7 +112,7 @@ function Uploader() {
 
     // Bookings need to be created LAST
     await createGuests();
-    await createCabins();
+    await createEditCabins();
     await createBookings();
 
     setIsLoading(false);

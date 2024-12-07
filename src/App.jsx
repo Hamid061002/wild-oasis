@@ -46,7 +46,7 @@ function App() {
         gutter={12}
         toastOptions={{
           success: {
-            duration: 300000,
+            duration: 3000,
           },
           error: {
             duration: 5000,

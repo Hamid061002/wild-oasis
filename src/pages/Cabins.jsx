@@ -17,7 +17,7 @@ function Cabins() {
         <CabinTable />
         <button onClick={() => setShowForm(e => !e)} className="self-start rounded-lg px-8 py-2 -bg--color-brand-600 hover:-bg--color-brand-700 transition-all -text--color-brand-50 text-lg">{showForm ? 'Hide form' : 'Add new cabin'}</button>
         {
-          showForm && <CreateCabinForm />
+          showForm && <CreateCabinForm setShowForm={setShowForm} />
         }
       </div>
     </div>

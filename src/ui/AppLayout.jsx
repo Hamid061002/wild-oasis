@@ -9,8 +9,10 @@ const AppLayout = () => {
       <div className='row-span-2'>
         <SideBar />
       </div>
-      <Header />
-      <main className=' p-[4rem_4.8rem_6.4rem] -bg--color-grey-50'>
+      <div className=''>
+        <Header />
+      </div>
+      <main className=' p-[4rem_4.8rem_6.4rem] -bg--color-grey-50 overflow-y-scroll'>
         <Outlet />
       </main>
     </div>

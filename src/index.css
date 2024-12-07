@@ -107,3 +107,9 @@ nav a.active {
   background-color: #f3f4f6;
   border-radius: 8px;
 }
+
+@layer components {
+  .transitionOptimazed {
+    @apply transition-all duration-300;
+  }
+}
