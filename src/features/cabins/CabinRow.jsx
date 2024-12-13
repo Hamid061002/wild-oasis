@@ -5,6 +5,7 @@ import { deleteCabin } from "../../services/apiCabin";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
+import useDeleteCabin from "./useDeleteCabin";
 
 const TableRow = styled.div`
   display: grid;
@@ -50,33 +51,22 @@ export default function CabinRow({ cabin }) {
 
   const { id: cabinId, name, maxCapacity, regularPrice, discount, image } = cabin
 
-  const queryClient = useQueryClient()
-
-  const { mutate, isPending, data, } = useMutation({
-    mutationFn: deleteCabin,
-    onSuccess: () => {
-      toast.success('Cabin successfully deleted')
-      queryClient.invalidateQueries({
-        queryKey: ['cabin']
-      })
-    },
-    onError: err => toast.error(err.message)
-  })
+  const { deleteCabinFn, isDeleting} = useDeleteCabin()
 
   return (
     <>
-      <div className={`grid grid-cols-6 gap-y-9 items-center justify-items-center py-6 px-10 border-b -border--color-grey-200 ${isPending == true ? 'opacity-50' : ''}`}>
+      <div className={`grid grid-cols-6 gap-y-9 items-center justify-items-center py-6 px-10 border-b -border--color-grey-200 ${isDeleting == true ? 'opacity-50' : ''}`}>
         <img className="block w-[6.4rem] aspect-video object-cover object-center scale-150 -translate-x-2" src={image} />
         <div className="text-2xl -text--color-grey-600 sono-600">{name}</div>
         <div className="text-center">Fix up to {maxCapacity} guests</div>
         <div className="sono-600">{formatCurrency(regularPrice)}</div>
-        <div className="sono-600 -text--color-green-700">{formatCurrency(discount)}</div>
+        {discount ? <div className="sono-600 -text--color-green-700">{formatCurrency(discount)}</div> : <span>_</span>}
         <div className="flex flex-col gap-1 text-base">
           <button
-            disabled={isPending}
-            onClick={() => mutate(cabinId)}
+            disabled={isDeleting}
+            onClick={() => deleteCabinFn(cabinId)}
             className="-bg--color-red-700 px-3 py-1 rounded-lg text-white hover:-bg--color-red-800 transitionOptimazed"
-          >{isPending == true ? 'Deleting..' : 'Delete'}</button>
+          >{isDeleting == true ? 'Deleting..' : 'Delete'}</button>
           <button
             onClick={() => setShowEditForm(e => !e)}
             className="-text--color-grey-700 px-3 py-1 rounded-lg -bg--color-grey-100 hover:-bg--color-grey-200 transitionOptimazed"
@@ -84,7 +74,7 @@ export default function CabinRow({ cabin }) {
         </div>
       </div>
       {
-        showEditForm && <CreateCabinForm setShowForm={setShowEditForm} cabinToAdd={cabin} />
+        showEditForm && <CreateCabinForm setShowForm={setShowEditForm} cabinToEdit={cabin} />
       }
     </>
   )

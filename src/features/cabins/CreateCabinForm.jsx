@@ -1,42 +1,39 @@
-
-
-// import Input from "../../ui/Input";
-import Form from "../../ui/Form";
-// import Button from "../../ui/Button";
-import FileInput from "../../ui/FileInput";
-import Textarea from "../../ui/Textarea";
-import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { createEditCabin } from "../../services/apiCabin";
-import { useState } from "react";
+
+import Form from "../../ui/Form";
+import FileInput from "../../ui/FileInput";
 import FormRow from "../../ui/FormRow";
 
+import { createCabin } from "../../services/apiCabin";
+import { editCabin } from "../../services/apiCabin";
+import { useForm } from "react-hook-form";
 
+function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
+  const { id: editId, ...editValues } = cabinToEdit
 
-function CreateCabinForm({ setShowForm, cabinToAdd = {} }) {
-  const { id: editId, ...editValues } = cabinToAdd
   const isEditSession = Boolean(editId)
 
   const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {}
   })
-  
+
   const { errors } = formState
 
   function onSubmitFn(data) {
-    const image = typeof (data.image === 'string') ? data.image : data.image[0]
+    const image = typeof (data.image) === 'string' ? data?.image : data.image[0]
 
-    if (isEditSession) editCabin({ ...data, image }, data.id)
-    else createCabin({ ...data, image: data.image[0] })
+    if (isEditSession) editCabinFn({ newCabinData: { ...data, image }, id: editId })
+    else createCabinFn({ ...data, image: image })
   }
 
   function onError() { }
 
   const queryClient = useQueryClient()
 
-  const { mutate: createCabin, isPending: isCreating } = useMutation({
-    mutationFn: createEditCabin,
+  /* create cabin */
+  const { mutate: createCabinFn, isPending: isCreating } = useMutation({
+    mutationFn: createCabin,
     onSuccess: () => {
       toast.success('New cabin successfully created')
       queryClient.invalidateQueries({
@@ -50,8 +47,10 @@ function CreateCabinForm({ setShowForm, cabinToAdd = {} }) {
     }
   })
 
-  const { mutate: editCabin, isPending: isEditing } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
+  /* edit cabin */
+  const { mutate: editCabinFn, isPending: isEditing } = useMutation({
+    // mutationFn: ({ newCabinData, id }) => editCabin(newCabinData, id),
+    mutationFn: ({ newCabinData, id }) => editCabin(newCabinData, id),
     onSuccess: () => {
       toast.success('Cabin successfully edited')
       queryClient.invalidateQueries({
@@ -113,11 +112,7 @@ function CreateCabinForm({ setShowForm, cabinToAdd = {} }) {
       <FormRow label='Discount' error={errors?.discount}>
         <input
           {...register('discount', {
-            required: 'This field is required!',
-            min: {
-              value: 1,
-              message: 'Discount should be at least 1'
-            },
+            required: 'This field is required!',            
             validate: value => Number(value) <= Number(getValues().regularPrice) || 'Discount should be less than regular price!'
           })}
           className={`border-2 rounded-lg py-2 px-4 ${errors.discount ? 'border-red-600' : '-border--color-grey-200'}`}
@@ -155,11 +150,12 @@ function CreateCabinForm({ setShowForm, cabinToAdd = {} }) {
           className="rounded-lg px-5 py-3 -text--color-grey-600 border-2 -border--color-grey-200 hover:-bg--color-grey-50"
           variation="secondary"
           type="reset"
+          disabled={isWorking}
         >Cancel</button>
         <button
           disabled={isWorking}
           className={`rounded-lg px-5 py-3 -text--color-brand-50 -bg--color-brand-600 hover:-bg--color-brand-700 ${isWorking ? 'opacity-50' : ''}`}
-        >{isWorking ? 'Creating...' : isEditSession ? 'Edit cabin' : 'Add cabin'}</button>
+        >{isWorking ? isEditSession ? 'Editing...' : 'Creating...' : isEditSession ? 'Edit cabin' : 'Add cabin'}</button>
       </div>
     </Form>
   );

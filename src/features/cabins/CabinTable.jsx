@@ -49,8 +49,9 @@ export default function CabinTable() {
         <div></div>
       </header>
       {
-        cabins.map(cabin => <CabinRow cabin={cabin} key={cabin.id} />)
-      }      
+        error ? <div className="py-6 px-10 -text--color-red-700">{error.message}!</div> :
+        cabins?.sort((prev, next) => prev.name - next.name).map(cabin => <CabinRow cabin={cabin} key={cabin.id} />)
+      }
     </div>
   )
 }

@@ -43,7 +43,7 @@ export default function FormRow({ label, error, children }) {
     <label htmlFor={children.props?.id}>{label}</label>
     <div className="flex flex-col gap-3">
       {children}
-      {error && <p className="w-fit px-3 py-1 rounded-lg text-base -text--color-red-700 -bg--color-red-100">{error.message}</p>}
+      {error && <p className="w-fit px-3 py-1 rounded-lg text-base -text--color-red-700 -bg--color-red-100 border">{error.message}</p>}
     </div>
   </FormRowStyled>
 }

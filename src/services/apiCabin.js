@@ -13,31 +13,31 @@ export async function getCabins() {
   return cabins
 }
 
-export async function createEditCabin(newCabin, id) {
-  console.log(newCabin, id);
-  const hasImagePath = newCabin.image[0]?.startsWith?.(supabaseUrl)
-  const imageName = `${newCabin.image.name}`.replaceAll('/', '')
-  const imagePath = hasImagePath ? newCabin.image : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`
+function getNamePathImage(image) {
+  const hasImagePath = Boolean(image?.startsWith?.(supabaseUrl))
+  console.log('hasImagePath: '+hasImagePath);
+  const imageName = !hasImagePath && `${image.name}`.replaceAll('/', '')
+  console.log('imageName: '+imageName);
+  const imagePath = hasImagePath ? image : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`
+  console.log('imagePath: '+imagePath);
+  
 
-  // create/edit cabin
-  let query = supabase.from('cabins')
+  return { imageName, imagePath }
+}
+
+export async function createCabin(newCabin) {
+  const imageName = `${newCabin.image.name}`.replaceAll('/', '')
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`
 
   // A) CREATE
-  if (!id)
-    query.insert([{
+  const { data, error: createCabinError } = await supabase
+    .from('cabins')
+    .insert([{
       ...newCabin, image: imagePath
-    }])
+    }]).select().single()
 
-  // B) EDIT
-  if (id)
-    query.update({
-      ...newCabin, image: imagePath
-    }).eq('id', id)
-
-  const { data, error } = await query.select().single()
-
-  if (error) {
-    console.log(error);
+  if (createCabinError) {
+    console.log(createCabinError.message);
     throw new Error('cabin could not can be created')
   }
 
@@ -53,7 +53,43 @@ export async function createEditCabin(newCabin, id) {
       .from('cabins')
       .delete()
       .eq('id', data.id)
+
     throw new Error('cabin image could not can be uploaded and the cabin was not created')
+  }
+
+}
+
+export async function editCabin(newCabin, id) {
+  const { imageName, imagePath } = getNamePathImage(newCabin.image)
+
+  const { data, error: editCabinError } = await supabase
+    .from('cabins')
+    .update({
+      ...newCabin, image: imagePath
+    }).eq('id', id).select().single()
+    
+
+  if (editCabinError) {
+    console.log(editCabinError.message);
+    throw new Error('cabin could not can be edited')
+  }
+
+  if (imageName) {
+    //upload image
+    const { error: storegeError } = await supabase
+      .storage
+      .from('cabin-images')
+      .upload(imageName, newCabin.image)
+
+    //delete the cabin if there was an error uploading image
+    if (storegeError) {
+      await supabase
+        .from('cabins')
+        .delete()
+        .eq('id', data.id)
+
+      throw new Error('cabin image could not can be uploaded and the cabin was not created')
+    }
   }
 }
 
