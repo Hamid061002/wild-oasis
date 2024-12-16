@@ -34,11 +34,6 @@ import { HiOutlineCalendarDays, HiOutlineCog6Tooth, HiOutlineHome, HiOutlineHome
 import { NavLink } from "react-router-dom";
 
 const MainNav = () => {
-  // useEffect(() => {
-  //   const navLinks = Array.from(document.querySelectorAll('a'))
-  //   navLinks.forEach(item => item.className.includes('active') ? item.className = `${item.className} -text--color-grey-800 -bg--color-grey-100 rounded-lg` : '')
-  // }, [])
-
   return (
     <nav>
       <ul className="flex flex-col gap-2 py-10">
@@ -67,7 +62,7 @@ const MainNav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-5 px-9 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/setting">
+          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-5 px-9 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/settings">
             <HiOutlineCog6Tooth className="stroke-2" />
             <span>Setting</span>
           </NavLink>

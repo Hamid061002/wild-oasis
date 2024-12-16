@@ -1,8 +1,6 @@
-
-import { useQuery } from "@tanstack/react-query"
-import { getCabins } from "../../services/apiCabin"
 import Spinner from "../../ui/Spinner"
 import CabinRow from "./CabinRow"
+import useCabins from "./useCabins"
 
 // import styled from "styled-components";
 
@@ -31,12 +29,9 @@ import CabinRow from "./CabinRow"
 // `;
 
 export default function CabinTable() {
-  const { isLoading, data: cabins, error } = useQuery({
-    queryKey: ['cabin'],
-    queryFn: getCabins
-  })
+  const { isGettingCabins, cabins, getCabinsError } = useCabins()  
 
-  if (isLoading) return <Spinner />
+  if (isGettingCabins) return <Spinner />
 
   return (
     <div className="border text-xl -bg--color-grey-0 rounded-lg -border--color-grey-200 overflow-hidden">
@@ -49,7 +44,7 @@ export default function CabinTable() {
         <div></div>
       </header>
       {
-        error ? <div className="py-6 px-10 -text--color-red-700">{error.message}!</div> :
+        getCabinsError ? <div className="py-6 px-10 -text--color-red-700">{getCabinsError.message}!</div> :
         cabins?.sort((prev, next) => prev.name - next.name).map(cabin => <CabinRow cabin={cabin} key={cabin.id} />)
       }
     </div>

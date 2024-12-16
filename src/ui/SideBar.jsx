@@ -1,11 +1,12 @@
 import React from 'react'
 import Logo from './Logo'
 import MainNav from './MainNav'
+import { Link } from 'react-router-dom'
 
 const SideBar = () => {
   return (
     <aside className='pt-[3.2rem] px-[2.4rem]'>
-      <Logo />
+      <Link to='dashboard'><Logo /></Link>
       <MainNav />
     </aside>
   )

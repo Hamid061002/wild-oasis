@@ -1,17 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
-
 import Form from "../../ui/Form";
 import FileInput from "../../ui/FileInput";
 import FormRow from "../../ui/FormRow";
 
-import { createCabin } from "../../services/apiCabin";
-import { editCabin } from "../../services/apiCabin";
 import { useForm } from "react-hook-form";
+import useCreateCabin from "./useCreateCabin";
+import useEditCabin from "./useEditCabin";
 
-function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
+function CreateCabinForm({ onCloseModal, cabinToEdit = {} }) {
   const { id: editId, ...editValues } = cabinToEdit
-
   const isEditSession = Boolean(editId)
 
   const { register, handleSubmit, reset, getValues, formState } = useForm({
@@ -20,51 +16,25 @@ function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
 
   const { errors } = formState
 
+  const { createCabinFn, isCreating } = useCreateCabin()
+  const { editCabinFn, isEditing } = useEditCabin()
+  const isWorking = isCreating || isEditing
+
   function onSubmitFn(data) {
     const image = typeof (data.image) === 'string' ? data?.image : data.image[0]
 
-    if (isEditSession) editCabinFn({ newCabinData: { ...data, image }, id: editId })
-    else createCabinFn({ ...data, image: image })
+    if (isEditSession) editCabinFn({ newCabinData: { ...data, image }, id: editId }, {
+      onSuccess: () => reset()
+    })
+    else createCabinFn({ ...data, image: image }, {
+      onSuccess: () => {
+        reset()
+        onCloseModal(false)
+      }
+    })
   }
 
   function onError() { }
-
-  const queryClient = useQueryClient()
-
-  /* create cabin */
-  const { mutate: createCabinFn, isPending: isCreating } = useMutation({
-    mutationFn: createCabin,
-    onSuccess: () => {
-      toast.success('New cabin successfully created')
-      queryClient.invalidateQueries({
-        queryKey: ['cabin']
-      })
-      reset()
-    },
-    onError: err => {
-      toast.error(err.message)
-      console.log(err);
-    }
-  })
-
-  /* edit cabin */
-  const { mutate: editCabinFn, isPending: isEditing } = useMutation({
-    // mutationFn: ({ newCabinData, id }) => editCabin(newCabinData, id),
-    mutationFn: ({ newCabinData, id }) => editCabin(newCabinData, id),
-    onSuccess: () => {
-      toast.success('Cabin successfully edited')
-      queryClient.invalidateQueries({
-        queryKey: ['cabin']
-      })
-      reset()
-    },
-    onError: err => {
-      toast.error(err.message)
-      console.log(err);
-    }
-  })
-
-  const isWorking = isCreating || isEditing
 
   return (
     <Form onSubmit={handleSubmit(onSubmitFn, onError)}>
@@ -73,7 +43,7 @@ function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
           {...register('name', {
             required: 'This field is required!',
           })}
-          className={`border-2 rounded-lg py-2 px-4 ${errors.name ? 'border-red-600' : '-border--color-grey-200'}`}
+          className={`w-full border-2 rounded-lg py-2 px-4 ${errors.name ? 'border-red-600' : '-border--color-grey-200'}`}
           type="text"
           id='name'
         />
@@ -88,7 +58,7 @@ function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
               message: 'Maximum capacity should be at least 1'
             }
           })}
-          className={`border-2 rounded-lg py-2 px-4 ${errors.maxCapacity ? 'border-red-600' : '-border--color-grey-200'}`}
+          className={`w-full border-2 rounded-lg py-2 px-4 ${errors.maxCapacity ? 'border-red-600' : '-border--color-grey-200'}`}
           type="number"
           id="maxCapacity"
         />
@@ -103,7 +73,7 @@ function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
               message: 'Regular price should be at least 10'
             }
           })}
-          className={`border-2 rounded-lg py-2 px-4 ${errors.regularPrice ? 'border-red-600' : '-border--color-grey-200'}`}
+          className={`w-full border-2 rounded-lg py-2 px-4 ${errors.regularPrice ? 'border-red-600' : '-border--color-grey-200'}`}
           type="number"
           id="regularPrice"
         />
@@ -112,10 +82,10 @@ function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
       <FormRow label='Discount' error={errors?.discount}>
         <input
           {...register('discount', {
-            required: 'This field is required!',            
+            required: 'This field is required!',
             validate: value => Number(value) <= Number(getValues().regularPrice) || 'Discount should be less than regular price!'
           })}
-          className={`border-2 rounded-lg py-2 px-4 ${errors.discount ? 'border-red-600' : '-border--color-grey-200'}`}
+          className={`w-full border-2 rounded-lg py-2 px-4 ${errors.discount ? 'border-red-600' : '-border--color-grey-200'}`}
           type="number"
           id="discount"
           defaultValue={0}
@@ -125,19 +95,19 @@ function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
       <FormRow label='Description for website' error={errors.description}>
         <textarea
           {...register('description')}
-          className={`border-2 rounded-lg py-2 px-4 w-full resize-none ${errors.description ? '-border--color-red-700' : '-border--color-grey-200 '}`}
+          className={`text-lg border-2 rounded-lg py-2 px-4 w-full resize-none ${errors.description ? '-border--color-red-700' : '-border--color-grey-200 '}`}
           id="description"
         />
       </FormRow>
 
       <FormRow label='Cabin photo' error={errors?.image}>
-        <div className="relative flex items-center gap-2 py-2 px-4 border-2 -border--color-grey-200 rounded-lg">
+        <div className={`py-2 px-4 border-2 -border--color-grey-200 rounded-lg ${errors?.image ? 'border-red-600' : '-border--color-grey-200'}`}>
           <FileInput
             {...register('image', {
               required: isEditSession ? false : 'This field is required!'
             })}
             type="file"
-            className=""
+            className={`w-full ${errors?.image && 'text-red-600'}`}
             id="image"
             accept="image/*"
           />
@@ -146,7 +116,7 @@ function CreateCabinForm({ setShowForm, cabinToEdit = {} }) {
 
       <div className="flex justify-end gap-4 py-4">
         <button
-          onClick={() => setShowForm(false)}
+          onClick={() => onCloseModal(false)}
           className="rounded-lg px-5 py-3 -text--color-grey-600 border-2 -border--color-grey-200 hover:-bg--color-grey-50"
           variation="secondary"
           type="reset"

@@ -1,7 +1,12 @@
+import useCabins from "../features/cabins/useCabins";
+import useSettings from "../features/settings/useSettings";
 import Heading from "../ui/Heading";
 // import Row from "../ui/Row";
 
 function Dashboard() {
+  useCabins()
+  useSettings()
+
   return (
     <div>
       Dashboard

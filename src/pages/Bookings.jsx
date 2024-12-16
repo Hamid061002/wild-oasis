@@ -3,10 +3,10 @@ import Heading from "../ui/Heading";
 
 function Bookings() {
   return (
-    <Row type="horizontal">
-      <Heading as="h1">All bookings</Heading>
+    <div type="horizontal">
+      <h1 className="text-4xl">All bookings</h1>
       <p>TEST</p>
-    </Row>
+    </div>
   );
 }
 

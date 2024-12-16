@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import { formatCurrency } from "../../utils/helpers";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCabin } from "../../services/apiCabin";
-import { toast } from "react-hot-toast";
 import { useState } from "react";
+
 import CreateCabinForm from "./CreateCabinForm";
 import useDeleteCabin from "./useDeleteCabin";
-
+import { formatCurrency } from "../../utils/helpers";
+import { HiMiniPencil, HiMiniTrash, HiPencil } from "react-icons/hi2"
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -48,29 +46,29 @@ const Discount = styled.div`
 
 export default function CabinRow({ cabin }) {
   const [showEditForm, setShowEditForm] = useState(false)
+  const { deleteCabinFn, isDeleting } = useDeleteCabin()
 
   const { id: cabinId, name, maxCapacity, regularPrice, discount, image } = cabin
 
-  const { deleteCabinFn, isDeleting} = useDeleteCabin()
 
   return (
     <>
       <div className={`grid grid-cols-6 gap-y-9 items-center justify-items-center py-6 px-10 border-b -border--color-grey-200 ${isDeleting == true ? 'opacity-50' : ''}`}>
-        <img className="block w-[6.4rem] aspect-video object-cover object-center scale-150 -translate-x-2" src={image} />
+        <img className="block border -border--color-grey-300 w-[6.4rem] aspect-video object-cover object-center scale-150 -translate-x-2 rounded" src={image} />
         <div className="text-2xl -text--color-grey-600 sono-600">{name}</div>
         <div className="text-center">Fix up to {maxCapacity} guests</div>
-        <div className="sono-600">{formatCurrency(regularPrice)}</div>
-        {discount ? <div className="sono-600 -text--color-green-700">{formatCurrency(discount)}</div> : <span>_</span>}
+        <div className="sono-700 underline underline-offset-4">{formatCurrency(regularPrice)}</div>
+        {discount ? <div className="sono-600 underline underline-offset-4 -text--color-green-700">{formatCurrency(discount)}</div> : <span>_</span>}
         <div className="flex flex-col gap-1 text-base">
           <button
             disabled={isDeleting}
             onClick={() => deleteCabinFn(cabinId)}
-            className="-bg--color-red-700 px-3 py-1 rounded-lg text-white hover:-bg--color-red-800 transitionOptimazed"
-          >{isDeleting == true ? 'Deleting..' : 'Delete'}</button>
+            className="flex  items-center gap-1 -bg--color-red-700 px-4 py-1 rounded-lg text-white hover:-bg--color-red-800 transitionOptimazed"
+          ><HiMiniTrash />{isDeleting == true ? 'Deleting..' : 'Delete'}</button>
           <button
             onClick={() => setShowEditForm(e => !e)}
-            className="-text--color-grey-700 px-3 py-1 rounded-lg -bg--color-grey-100 hover:-bg--color-grey-200 transitionOptimazed"
-          >Edit cabin</button>
+            className="flex items-center gap-1 -text--color-grey-700 px-2 py-1 rounded-lg -bg--color-grey-100 hover:-bg--color-grey-200 transitionOptimazed"
+          ><HiPencil  /> <span>Edit cabin</span></button>
         </div>
       </div>
       {
