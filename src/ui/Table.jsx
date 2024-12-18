@@ -40,7 +40,7 @@ import styled from "styled-components";
 //   margin: 0.4rem 0;
 // `;
 
-const Footer = styled.footer`
+const StyledFooter = styled.footer`
   background-color: var(--color-grey-50);
   display: flex;
   justify-content: center;
@@ -64,6 +64,8 @@ import React, { createContext, useContext } from 'react'
 const TableContext = createContext()
 
 export default function Table({ children, columns }) {
+  // const columnsEdit = columns.replaceAll(' ', '_')
+
   return <TableContext.Provider value={{ columns }}>
     <div className="border text-xl -bg--color-grey-0 rounded-lg -border--color-grey-200">
       {children}
@@ -75,7 +77,7 @@ function Header({ children }) {
   const { columns } = useContext(TableContext)
 
   return (
-    <header className={`grid grid-cols-${columns} gap-y-11 justify-items-center -bg--color-grey-50 border-b -border--color-grey-100 uppercase tracking-[0.4px] font-semibold -text--color-grey-600 py-6 px-10`}>
+    <header style={{ gridTemplateColumns: columns }} className={`grid gap-y-11 justify-items-center py-6 px-10 rounded-lg -bg--color-grey-50 border-b -border--color-grey-100 uppercase tracking-[0.4px] font-semibold -text--color-grey-600 text-xl`}>
       {children}
     </header>
   )
@@ -85,7 +87,7 @@ function Row({ children }) {
   const { columns } = useContext(TableContext)
 
   return (
-    <div className={`grid grid-cols-${columns} gap-y-9 items-center justify-items-center py-6 px-10 border-b -border--color-grey-200`}>
+    <div style={{ gridTemplateColumns: columns }} className={`grid gap-y-9 items-center justify-items-center text-center py-6 px-10 border-b -border--color-grey-200`}>
       {children}
     </div>
   )
@@ -97,6 +99,11 @@ function Body({ data, render }) {
   return <section>{data?.map(render)}</section>
 }
 
+function Footer({ children }) {
+  return <footer className="-bg--color-grey-50 flex justify-center w-full p-4 rounded-b-lg">{children}</footer>
+}
+
 Table.Header = Header
 Table.Row = Row
 Table.Body = Body
+Table.Footer = Footer

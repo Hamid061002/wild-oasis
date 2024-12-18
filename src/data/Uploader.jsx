@@ -55,7 +55,7 @@ async function createBookings() {
 
   const finalBookings = bookings.map((booking) => {
     // Here relying on the order of cabins, as they don't have and ID yet
-    const cabin = cabins.at(booking.cabinId - 1);
+    const cabin = cabins?.at(booking.cabinId - 1);
     const numNights = subtractDates(booking.endDate, booking.startDate);
     const cabinPrice = numNights * (cabin.regularPrice - cabin.discount);
     const extrasPrice = booking.hasBreakfast
@@ -96,8 +96,11 @@ async function createBookings() {
 
   console.log(finalBookings);
 
-  const { error } = await supabase.from("bookings").insert(finalBookings);
-  if (error) console.log(error.message);
+  const { error } = await supabase.from("bookings").insert(finalBookings).select()
+  if (error) {
+    console.log(error.message);
+    throw new Error(error.message)
+  }
 }
 
 function Uploader() {
@@ -140,9 +143,9 @@ function Uploader() {
     >
       <h3>SAMPLE DATA</h3>
 
-      <Button onClick={uploadAll} disabled={isLoading}>
+      <button onClick={uploadAll} disabled={isLoading}>
         Upload ALL
-      </Button>
+      </button>
 
       <Button onClick={uploadBookings} disabled={isLoading}>
         Upload bookings ONLY
@@ -151,4 +154,4 @@ function Uploader() {
   );
 }
 
-export default Uploader;
+export default Uploader

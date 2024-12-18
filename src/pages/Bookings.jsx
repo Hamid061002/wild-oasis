@@ -1,11 +1,16 @@
+import BookingTable from "../features/bookings/BookingTable";
+import BookingTableOperations from "../features/bookings/BookingTableOperations";
 import Heading from "../ui/Heading";
 // import Row from "../ui/Row";
 
 function Bookings() {
   return (
-    <div type="horizontal">
-      <h1 className="text-4xl">All bookings</h1>
-      <p>TEST</p>
+    <div className="flex flex-col gap-10">
+      <div className="flex justify-between items-center -text--color-grey-700">
+        <h1 className="text-4xl">All bookings</h1>
+        <BookingTableOperations />
+      </div>
+      <BookingTable />
     </div>
   );
 }

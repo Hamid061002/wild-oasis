@@ -1,5 +1,36 @@
+import { useSearchParams } from "react-router-dom";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
+import { PAGE_SIZE } from "../utils/constants";
+
+export async function getBookings({ filter, sortBy, page }) {
+  let query = supabase
+    .from('bookings')
+    .select('id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)', { count: 'exact' })
+
+  /* filter  */
+  if (filter) await query.eq(filter.field, filter.value)
+
+  /* sort by */
+  if (sortBy) await query.order(sortBy.field, { ascending: sortBy.direction == 'asc' })
+
+  /* pagination */
+  if (page) {
+    const from = (page - 1) * PAGE_SIZE
+    const to = from + PAGE_SIZE - 1
+
+    await query.range(from, to)
+  }
+
+  const { data, error, count } = await query
+
+  if (error) {
+    console.error(error.message);
+    throw new Error("Bookings could not get loaded");
+  }
+
+  return { data, count };
+}
 
 export async function getBooking(id) {
   const { data, error } = await supabase

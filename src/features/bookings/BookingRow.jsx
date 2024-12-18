@@ -8,7 +8,7 @@ import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 
 const Cabin = styled.div`
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: "Sono";
@@ -20,12 +20,13 @@ const Stacked = styled.div`
   gap: 0.2rem;
 
   & span:first-child {
+    font-size: 1.15rem;
     font-weight: 500;
   }
 
   & span:last-child {
     color: var(--color-grey-500);
-    font-size: 1.2rem;
+    font-size: 0.95rem;
   }
 `;
 

@@ -38,31 +38,31 @@ const MainNav = () => {
     <nav>
       <ul className="flex flex-col gap-2 py-10">
         <li>
-          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-4 px-8 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/dashboard">
+          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-4 px-7 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/dashboard">
             <HiOutlineHome className="stroke-2" />
             <span>Home</span>
           </NavLink>
         </li>
         <li>
-          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-5 px-9 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/bookings">
+          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-4 px-7 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/bookings">
             <HiOutlineCalendarDays className="stroke-2" />
             <span>Bookings</span>
           </NavLink>
         </li>
         <li>
-          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-5 px-9 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/cabins">
+          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-4 px-7 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/cabins">
             <HiOutlineHomeModern className="stroke-2" />
             <span>Cabins</span>
           </NavLink>
         </li>
         <li>
-          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-5 px-9 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/users">
+          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-4 px-7 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/users">
             <HiOutlineUsers className="stroke-2" />
             <span>Users</span>
           </NavLink>
         </li>
         <li>
-          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-5 px-9 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/settings">
+          <NavLink className="flex items-center gap-5 -text--color-grey-500 text-2xl py-4 px-7 transition-all duration-300 hover:-text--color-grey-800 hover:-bg--color-grey-100 hover:rounded-lg navLinks" to="/settings">
             <HiOutlineCog6Tooth className="stroke-2" />
             <span>Setting</span>
           </NavLink>
