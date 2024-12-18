@@ -1,14 +1,15 @@
+import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-const StyledFilter = styled.div`
-  border: 1px solid var(--color-grey-100);
-  background-color: var(--color-grey-0);
-  box-shadow: var(--shadow-sm);
-  border-radius: var(--border-radius-sm);
-  padding: 0.4rem;
-  display: flex;
-  gap: 0.4rem;
-`;
+// const StyledFilter = styled.div`
+//   border: 1px solid var(--color-grey-100);
+//   background-color: var(--color-grey-0);
+//   box-shadow: var(--shadow-sm);
+//   border-radius: var(--border-radius-sm);
+//   padding: 0.4rem;
+//   display: flex;
+//   gap: 0.4rem;
+// `;
 
 const FilterButton = styled.button`
   background-color: var(--color-grey-0);
@@ -22,10 +23,10 @@ const FilterButton = styled.button`
     `}
 
   border-radius: var(--border-radius-sm);
-  font-weight: 500;
-  font-size: 1.4rem;
+  font-weight: 600;
+  font-size: 1.1rem;
   /* To give the same height as select */
-  padding: 0.44rem 0.8rem;
+  padding: 0.4rem 0.7rem;
   transition: all 0.3s;
 
   &:hover:not(:disabled) {
@@ -33,3 +34,28 @@ const FilterButton = styled.button`
     color: var(--color-brand-50);
   }
 `;
+
+export default function Filter({ filterField, options }) {
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const currentFilter = searchParams.get(filterField) || options.at(0).value
+
+  function handleClickFilter(value) {
+    searchParams.set(filterField, value)
+    setSearchParams(searchParams)
+  }
+
+  return (
+    <div className="flex gap-2 border -border--color-grey-100 -bg--color-grey-0 shadow rounded-md p-1">
+      {
+        options.map(option =>
+          <FilterButton
+            onClick={() => handleClickFilter(option.value)}
+            active={option.value == currentFilter}
+            disabled={option.value == currentFilter}
+          >{option?.label}</FilterButton>)
+      }
+    </div>
+  )
+}
+

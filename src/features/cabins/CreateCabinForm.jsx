@@ -24,7 +24,10 @@ function CreateCabinForm({ onCloseModal, cabinToEdit = {} }) {
     const image = typeof (data.image) === 'string' ? data?.image : data.image[0]
 
     if (isEditSession) editCabinFn({ newCabinData: { ...data, image }, id: editId }, {
-      onSuccess: () => reset()
+      onSuccess: () => {
+        reset()
+        onCloseModal(false)
+      }
     })
     else createCabinFn({ ...data, image: image }, {
       onSuccess: () => {

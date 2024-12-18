@@ -1,7 +1,8 @@
-import { cloneElement, createContext, useContext, useState } from "react";
+import { cloneElement, createContext, useContext, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 // const StyledModal = styled.div`
 //   position: fixed;
@@ -72,11 +73,24 @@ function Open({ children, opens: openWindowName }) {
 function Window({ children, name }) {
   const { openName, closeModal } = useContext(ModalContext)
 
+  const { ref } = useOutsideClick(closeModal, true)
+  // useEffect(() => {
+  //   function hanldeOutsideCLick(e) {
+  //     if (ref.current && !ref.current.contains(e.target)) {
+  //       closeModal()
+  //     }
+  //   }
+
+  //   document.addEventListener('click', hanldeOutsideCLick, true)
+
+  //   return () => document.removeEventListener('click', hanldeOutsideCLick, true)
+  // }, [closeModal])
+
   if (openName !== name) return null
 
   return createPortal(
     <div className={`flex justify-center items-center fixed inset-0 w-full h-screen -bg--backdrop-color backdrop-blur-sm z-20 transition-all duration-200`}>
-      <div className="relative -bg--color-grey-0 rounded-xl shadow-lg transition-all">
+      <div ref={ref} className="relative -bg--color-grey-0 rounded-xl shadow-lg transition-all">
         <button onClick={closeModal} className="absolute top-5 right-7 p-1 rounded transition-all hover:-bg--color-grey-100"><HiXMark className="size-8" /></button>
         <div>{cloneElement(children, { onCloseModal: () => closeModal(openName) })}</div>
       </div>

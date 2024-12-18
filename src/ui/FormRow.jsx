@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import styled from "styled-components";
 
-const FormRowStyled = styled.div`
+export const FormRowStyled = styled.div`
   // display: grid;
   // align-items: center;
   // grid-template-columns: 24rem 1fr;
