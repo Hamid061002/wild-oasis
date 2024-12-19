@@ -95,7 +95,7 @@ function Toggle({ id, children }) {
   </button>
 }
 
-function List({ id, children }) {
+function List({ id, children, className }) {
   const { openId, closeMenu } = useContext(MenusContext)
 
   const ignoreCondition = (e) => e.target.closest("[data-toggle]");
@@ -104,14 +104,14 @@ function List({ id, children }) {
   if (openId != id) return null
 
   return (
-    <ul ref={ref} className="flex flex-col gap-1 p-1 rounded-lg absolute z-10 top-12 -bg--color-grey-0 shadow-md">
+    <ul ref={ref} className={`flex flex-col rounded-lg absolute z-10 -bg--color-grey-0 shadow-md ${className ? className : 'gap-1 p-1 top-12'}`}>
       {children}
     </ul>
   )
 }
 
-function Button({ children }) {
-  return <li>
+function Button({ children, className }) {
+  return <li className={className}>
     {children}
   </li>
 }

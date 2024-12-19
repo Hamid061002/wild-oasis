@@ -42,6 +42,7 @@ export default function Filter({ filterField, options }) {
 
   function handleClickFilter(value) {
     searchParams.set(filterField, value)
+    if (searchParams.get('page')) searchParams.set('page', 1)
     setSearchParams(searchParams)
   }
 
@@ -50,6 +51,7 @@ export default function Filter({ filterField, options }) {
       {
         options.map(option =>
           <FilterButton
+            key={option}
             onClick={() => handleClickFilter(option.value)}
             active={option.value == currentFilter}
             disabled={option.value == currentFilter}

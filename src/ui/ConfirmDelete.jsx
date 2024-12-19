@@ -17,9 +17,9 @@ import styled from "styled-components";
 function ConfirmDelete({ resourceName, onConfirm, disabled, onCloseModal }) {
   return (
     <div className="w-[640px] flex flex-col gap-5 p-10">
-      <h3 className="text-3xl" as="h3">Delete the cabin {resourceName}</h3>
+      <h3 className="text-3xl" as="h3">Delete the {resourceName}</h3>
       <p className="-text--color-grey-500 mb-7">
-        Are you sure you want to delete this cabin {resourceName} permanently? <br />This
+        Are you sure you want to delete this {resourceName} permanently? <br />This
         action cannot be undone.
       </p>
 

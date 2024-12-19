@@ -81,7 +81,9 @@ export default function Pagination({ count }) {
     setSearchParams(searchParams)
   }
 
+
   return (
+
     <StyledPagination>
       <p>showing {(currentPage - 1) * PAGE_SIZE + 1 != count && <span> {(currentPage - 1) * PAGE_SIZE + 1} to</span>} <span>{currentPage == pageCount ? count : currentPage * PAGE_SIZE}</span> of <span>{count}</span> results</p>
       {
@@ -96,7 +98,7 @@ export default function Pagination({ count }) {
           }
           {
             currentPage < pageCount &&
-            < PaginationButton onClick={nextPage} >
+            <PaginationButton onClick={nextPage} >
               <span>Next</span>
               <HiChevronRight />
             </PaginationButton>

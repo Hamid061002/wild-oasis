@@ -87,7 +87,7 @@ function Row({ children }) {
   const { columns } = useContext(TableContext)
 
   return (
-    <div style={{ gridTemplateColumns: columns }} className={`grid gap-y-9 items-center justify-items-center text-center py-6 px-10 border-b -border--color-grey-200`}>
+    <div style={{ gridTemplateColumns: columns }} className={`grid gap-y-9 items-center justify-items-center text-center py-6 px-10 border-b -border--color-grey-200 last:border-none`}>
       {children}
     </div>
   )

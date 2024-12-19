@@ -5,7 +5,7 @@ import useSettings from "../features/settings/useSettings";
 function Dashboard() {
   useCabins()
   useSettings()
-  useBookings()  
+  useBookings()
 
   return (
     <div>

@@ -25,23 +25,23 @@ const Header = styled.header`
   background-color: var(--color-brand-500);
   padding: 2rem 4rem;
   color: #e0e7ff;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   svg {
-    height: 3.2rem;
-    width: 3.2rem;
+    height: 3rem;
+    width: 3rem;
   }
 
   & div:first-child {
     display: flex;
     align-items: center;
-    gap: 1.6rem;
+    gap: 1.2rem;
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   & span {
@@ -102,7 +102,7 @@ const Footer = styled.footer`
 `;
 
 // A purely presentational component
-function BookingDataBox({ booking }) {
+function BookingDataBox({ booking = {} }) {
   const {
     created_at,
     startDate,
@@ -115,8 +115,8 @@ function BookingDataBox({ booking }) {
     hasBreakfast,
     observations,
     isPaid,
-    guests: { fullName: guestName, email, country, countryFlag, nationalID },
-    cabins: { name: cabinName },
+    guests: { fullName: guestName, email, country, countryFlag, nationalID } = {},
+    cabins: { name: cabinName } ={},
   } = booking;
 
   return (
