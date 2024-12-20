@@ -14,6 +14,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Toaster } from 'react-hot-toast'
 import Booking from './pages/Booking'
 import Checkin from './pages/Checkin'
+import ProtectedRoute from './ui/ProtectedRoute'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,7 +30,7 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout />}>
+          <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
             <Route index element={<Navigate replace to='dashboard' />} />
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='bookings' element={<Bookings />} />
@@ -45,7 +46,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <div className='backdrop-blur-sm brightness-75'></div>
-      <Toaster 
+      <Toaster
         position='top-center'
         gutter={12}
         toastOptions={{
@@ -55,7 +56,7 @@ function App() {
           error: {
             duration: 5000,
           },
-          className: 'm-0 shadow-none border-2 -border--color-grey-200 text-lg w-fit max-w-[500px] py-4 px-6 -bg--color-grey-0 -text--color-grey-700 rounded-full px-4 py-1'
+          className: 'm-0 shadow-none border-2 -border--color-grey-200 text-lg w-fit max-w-[500px] py-2 px-6 -bg--color-grey-0 -text--color-grey-700 rounded-full px-4 py-1'
         }}
       />
     </QueryClientProvider>
