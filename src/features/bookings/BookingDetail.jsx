@@ -63,7 +63,7 @@ function BookingDetail() {
         <Modal>
           <Modal.Open opens='delete-booking'>
             <button
-              className="flex items-center gap-2 w-fit px-3 py-2 -bg--color-red-700 text-white hover:-bg--color-red-800 transitionOptimazed rounded-md text-base">
+              className="flex items-center gap-2 w-fit px-3 py-2 -bg--color-red-700 text-white hover:-bg--color-red-800 transitionOptimized rounded-md text-base">
               <HiMiniTrash className="flex-none" size={20} />
               <span className="text-nowrap">Delete</span>
             </button>

@@ -12,7 +12,7 @@ export default function useSignup() {
 
     onSuccess: () => {
       navigate('/dashboard')
-      toast.success('Account successfully created! Please verify the new account from the user\'s email address!')
+      toast.success('Account successfully created!\n Please verify the new account from the user\'s email address!')
     },
 
     // onError: error => {

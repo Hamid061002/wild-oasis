@@ -99,7 +99,7 @@ function BookingRow({
               <Menus.Button className='w-full'>
                 <button
                   onClick={() => navigate(`/bookings/${bookingId}`)}
-                  className="flex items-center gap-2 w-full px-3 py-2 hover:-bg--color-grey-100 transitionOptimazed rounded-md text-base">
+                  className="flex items-center gap-2 w-full px-3 py-2 hover:-bg--color-grey-100 transitionOptimized rounded-md text-base">
                   <HiEye className="flex-none" size={20} />
                   <span className="text-nowrap">See details</span>
                 </button>
@@ -107,7 +107,7 @@ function BookingRow({
               {status == 'unconfirmed' && <Menus.Button className='w-full'>
                 <button
                   onClick={() => navigate(`/checkin/${bookingId}`)}
-                  className="flex items-center gap-2 w-full px-3 py-2 hover:-bg--color-grey-100 transitionOptimazed rounded-md text-base">
+                  className="flex items-center gap-2 w-full px-3 py-2 hover:-bg--color-grey-100 transitionOptimized rounded-md text-base">
                   <HiArrowDownOnSquare className="flex-none" size={20} />
                   <span className="text-nowrap">Check in</span>
                 </button>
@@ -116,7 +116,7 @@ function BookingRow({
                 <button
                   disabled={isCheckingOut}
                   onClick={() => status == 'checked-in' && checkoutFn(bookingId)}
-                  className="flex items-center gap-2 w-full px-3 py-2 hover:-bg--color-grey-100 disabled:opacity-50 transitionOptimazed rounded-md text-base">
+                  className="flex items-center gap-2 w-full px-3 py-2 hover:-bg--color-grey-100 disabled:opacity-50 transitionOptimized rounded-md text-base">
                   <HiArrowUpOnSquare className="flex-none" size={20} />
                   <span className="text-nowrap">Check out</span>
                 </button>
@@ -124,7 +124,7 @@ function BookingRow({
               <Menus.Button>
                 <Modal.Open opens='delete-cabin'>
                   <button
-                    className="flex items-center gap-2 w-full px-3 py-2 -bg--color-red-700 text-white hover:-bg--color-red-800 disabled:opacity-50 transitionOptimazed rounded-md text-base"
+                    className="flex items-center gap-2 w-full px-3 py-2 -bg--color-red-700 text-white hover:-bg--color-red-800 disabled:opacity-50 transitionOptimized rounded-md text-base"
                   ><HiMiniTrash />Delete</button>
                 </Modal.Open>
               </Menus.Button>

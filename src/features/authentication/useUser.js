@@ -10,5 +10,5 @@ export default function useUser() {
 
   const isAuthenticated = Boolean(user?.role)
 
-  return { isAuthenticated, isLoading }
+  return { isAuthenticated, isLoading, user }
 }

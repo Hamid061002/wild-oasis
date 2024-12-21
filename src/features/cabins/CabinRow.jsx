@@ -69,7 +69,7 @@ export default function CabinRow({ cabin }) {
               <Menus.Button>
                 <Modal.Open opens='edit-cabin'>
                   <button
-                    className="flex items-center gap-1 text-nowrap -text--color-grey-700 px-2 py-1 rounded-md -bg--color-grey-100 hover:-bg--color-grey-200 transitionOptimazed"
+                    className="flex items-center gap-1 text-nowrap -text--color-grey-700 px-2 py-1 rounded-md -bg--color-grey-100 hover:-bg--color-grey-200 transitionOptimized"
                   ><HiPencil /> <span>Edit cabin</span></button>
                 </Modal.Open>
               </Menus.Button>
@@ -77,7 +77,7 @@ export default function CabinRow({ cabin }) {
               <Menus.Button>
                 <Modal.Open opens='delete-cabin'>
                   <button
-                    className="flex items-center gap-1 w-full -bg--color-red-700 px-4 py-1 rounded-md text-white hover:-bg--color-red-800 transitionOptimazed"
+                    className="flex items-center gap-1 w-full -bg--color-red-700 px-4 py-1 rounded-md text-white hover:-bg--color-red-800 transitionOptimized"
                   ><HiMiniTrash />Delete</button>
                 </Modal.Open>
               </Menus.Button>
@@ -115,7 +115,7 @@ export default function CabinRow({ cabin }) {
     //       {/* delete modal */}
     //       <Modal.Open opens='edit-cabin'>
     //         <button
-    //           className="flex  items-center gap-1 -bg--color-red-700 px-4 py-1 rounded-lg text-white hover:-bg--color-red-800 transitionOptimazed"
+    //           className="flex  items-center gap-1 -bg--color-red-700 px-4 py-1 rounded-lg text-white hover:-bg--color-red-800 transitionOptimized"
     //         ><HiMiniTrash />Delete</button>
     //       </Modal.Open>
     //       <Modal.Window name='edit-cabin'>
@@ -125,7 +125,7 @@ export default function CabinRow({ cabin }) {
     //       {/* edit modal */}
     //       <Modal.Open opens='delete-cabin'>
     //         <button
-    //           className="flex items-center gap-1 -text--color-grey-700 px-2 py-1 rounded-lg -bg--color-grey-100 hover:-bg--color-grey-200 transitionOptimazed"
+    //           className="flex items-center gap-1 -text--color-grey-700 px-2 py-1 rounded-lg -bg--color-grey-100 hover:-bg--color-grey-200 transitionOptimized"
     //         ><HiPencil /> <span>Edit cabin</span></button>
     //       </Modal.Open>
     //       <Modal.Window name='delete-cabin'>

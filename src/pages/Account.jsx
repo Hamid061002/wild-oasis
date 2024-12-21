@@ -1,21 +1,24 @@
-import Heading from "../ui/Heading";
+// import Heading from "../ui/Heading";
 // import Row from "../ui/Row";
+
+import UpdatePasswordForm from "../features/authentication/UpdatePasswordForm";
+import UpdateUserDataForm from "../features/authentication/UpdateUserDataForm";
 
 function Account() {
   return (
-    <>
-      <Heading as="h1">Update your account</Heading>
+    <div className="flex flex-col gap-10 -text--color-grey-700">
+      <h1 className="text-4xl">Update your account</h1>
 
-      <Row>
-        <Heading as="h3">Update user data</Heading>
-        <p>Update user data form</p>
-      </Row>
+      <div className="flex flex-col gap-4">
+        <h3 className="text-2xl">Update user data</h3>
+        <UpdateUserDataForm />
+      </div>
 
-      <Row>
-        <Heading as="h3">Update password</Heading>
-        <p>Update user password form</p>
-      </Row>
-    </>
+      <div className="flex flex-col gap-4">
+        <h3 className="text-2xl">Update password</h3>
+        <UpdatePasswordForm />
+      </div>
+    </div>
   );
 }
 
