@@ -22,7 +22,7 @@ function SignupForm() {
     <Form onSubmit={handleSubmit(handleSubmitFn)}>
       <FormRowSignUp label="Full name" error={errors?.fullName}>
         <input
-          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.fullName ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.fullName ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
           type="text"
           {...register('fullName', {
             required: 'This field is required!'
@@ -34,7 +34,7 @@ function SignupForm() {
 
       <FormRowSignUp label="Email address" error={errors?.email}>
         <input
-          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.email ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.email ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
           type="email"
           {...register('email', {
             required: 'This field is required!',
@@ -50,7 +50,7 @@ function SignupForm() {
 
       <FormRowSignUp label="Password (min 8 characters)" error={errors?.password}>
         <input
-          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.password ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.password ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
           type="password"
           {...register('password', {
             required: 'This field is required!',
@@ -66,7 +66,7 @@ function SignupForm() {
 
       <FormRowSignUp label="Repeat password" error={errors?.passwordConfirm}>
         <input
-          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.passwordConfirm ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.passwordConfirm ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
           type="password"
           {...register('passwordConfirm', {
             required: 'This field is required!',

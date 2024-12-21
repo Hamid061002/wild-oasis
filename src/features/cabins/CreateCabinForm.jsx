@@ -45,7 +45,7 @@ function CreateCabinForm({ onCloseModal, cabinToEdit = {} }) {
           {...register('name', {
             required: 'This field is required!',
           })}
-          className={`w-full border-2 rounded-lg py-2 px-4 ${errors.name ? 'border-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 ${errors.name ? 'border-red-600' : '-border--color-grey-200'}`}
           type="text"
           id='name'
         />
@@ -60,7 +60,7 @@ function CreateCabinForm({ onCloseModal, cabinToEdit = {} }) {
               message: 'Maximum capacity should be at least 1'
             }
           })}
-          className={`w-full border-2 rounded-lg py-2 px-4 ${errors.maxCapacity ? 'border-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 ${errors.maxCapacity ? 'border-red-600' : '-border--color-grey-200'}`}
           type="number"
           id="maxCapacity"
         />
@@ -75,7 +75,7 @@ function CreateCabinForm({ onCloseModal, cabinToEdit = {} }) {
               message: 'Regular price should be at least 10'
             }
           })}
-          className={`w-full border-2 rounded-lg py-2 px-4 ${errors.regularPrice ? 'border-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 ${errors.regularPrice ? 'border-red-600' : '-border--color-grey-200'}`}
           type="number"
           id="regularPrice"
         />
@@ -87,7 +87,7 @@ function CreateCabinForm({ onCloseModal, cabinToEdit = {} }) {
             required: 'This field is required!',
             validate: value => Number(value) <= Number(getValues().regularPrice) || 'Discount should be less than regular price!'
           })}
-          className={`w-full border-2 rounded-lg py-2 px-4 ${errors.discount ? 'border-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 ${errors.discount ? 'border-red-600' : '-border--color-grey-200'}`}
           type="number"
           id="discount"
           defaultValue={0}
@@ -97,7 +97,7 @@ function CreateCabinForm({ onCloseModal, cabinToEdit = {} }) {
       <FormRow label='Description for website' error={errors.description}>
         <textarea
           {...register('description')}
-          className={`text-lg border-2 rounded-lg py-2 px-4 w-full resize-none ${errors.description ? '-border--color-red-700' : '-border--color-grey-200 '}`}
+          className={`bg-transparent text-lg border-2 rounded-lg py-2 px-4 w-full resize-none ${errors.description ? '-border--color-red-700' : '-border--color-grey-200 '}`}
           id="description"
         />
       </FormRow>

@@ -1,11 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      // --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+      // --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
+      // --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
+
+      // --image-grayscale: 10%;
+      // --image-opacity: 90%;
+
       colors: {
         /* Indigo */
         '--color-brand-50': '#eef2ff',
@@ -18,34 +26,34 @@ export default {
         '--color-brand-900': '#312e81',
 
         /* Grey */
-        '--color-grey-0': '#fff',
-        '--color-grey-50': '#f9fafb',
-        '--color-grey-100': '#f3f4f6',
-        '--color-grey-200': '#e5e7eb',
-        '--color-grey-300': '#d1d5db',
-        '--color-grey-400': '#9ca3af',
-        '--color-grey-500': '#6b7280',
-        '--color-grey-600': '#4b5563',
-        '--color-grey-700': '#374151',
-        '--color-grey-800': '#1f2937',
-        '--color-grey-900': '#111827',
+        '--color-grey-0': 'var(--color-grey-0)',
+        '--color-grey-50': 'var(--color-grey-50)',
+        '--color-grey-100': 'var(--color-grey-100)',
+        '--color-grey-200': 'var(--color-grey-200)',
+        '--color-grey-300': 'var(--color-grey-300)',
+        '--color-grey-400': 'var(--color-grey-400)',
+        '--color-grey-500': 'var(--color-grey-500)',
+        '--color-grey-600': 'var(--color-grey-600)',
+        '--color-grey-700': 'var(--color-grey-700)',
+        '--color-grey-800': 'var(--color-grey-800)',
+        '--color-grey-900': 'var(--color-grey-900)',
 
-        '--color-blue-100': '#e0f2fe',
-        '--color-blue-700': '#0369a1',
-        '--color-green-100': '#dcfce7',
-        '--color-green-700': '#15803d',
-        '--color-yellow-100': '#fef9c3',
-        '--color-yellow-700': '#a16207',
-        '--color-silver-100': '#e5e7eb',
-        '--color-silver-700': '#374151',
-        '--color-indigo-100': '#e0e7ff',
-        '--color-indigo-700': '#4338ca',
+        '--color-blue-100': 'var(--color-blue-100)',
+        '--color-blue-700': 'var(--color-blue-700)',
+        '--color-green-100': 'var(--color-green-100)',
+        '--color-green-700': 'var(--color-green-700)',
+        '--color-yellow-100': 'var(--color-yellow-100)',
+        '--color-yellow-700': 'var(--color-yellow-700)',
+        '--color-silver-100': 'var(--color-silver-100)',
+        '--color-silver-700': 'var(--color-silver-700)',
+        '--color-indigo-100': 'var(--color-indigo-100)',
+        '--color-indigo-700': 'var(--color-indigo-700)',
 
-        '--color-red-100': '#fee2e2',
-        '--color-red-700': '#b91c1c',
-        '--color-red-800': '#991b1b',
+        '--color-red-100': 'var(--color-red-100)',
+        '--color-red-700': 'var(--color-red-700)',
+        '--color-red-800': 'var(--color-red-800)',
 
-        '--backdrop-color': 'rgba(255, 255, 255, 0.1)',
+        '--backdrop-color': 'var(--backdrop-color)',
 
         '--shadow-sm': '0 1px 2px rgba(0, 0, 0, 0.04)',
         '--shadow-md': '0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06)',

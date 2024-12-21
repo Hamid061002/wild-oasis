@@ -32,7 +32,7 @@ function UpdatePasswordForm() {
         error={errors?.password}
       >
         <input
-          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:opacity-50 disabled:-bg--color-grey-200 ${errors?.password ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 outline-none disabled:opacity-50 disabled:-bg--color-grey-200 ${errors?.password ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
           type="password"
           id="password"
           autoComplete="current-password"
@@ -52,7 +52,7 @@ function UpdatePasswordForm() {
         error={errors?.passwordConfirm}
       >
         <input
-          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:opacity-50 disabled:-bg--color-grey-200 ${errors?.passwordConfirm ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 outline-none disabled:opacity-50 disabled:-bg--color-grey-200 ${errors?.passwordConfirm ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
           type="password"
           autoComplete="new-password"
           id="passwordConfirm"

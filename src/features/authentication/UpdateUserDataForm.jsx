@@ -44,13 +44,13 @@ function UpdateUserDataForm() {
     <Form onSubmit={handleSubmit}>
       <FormRow label="Email address">
         <input
-          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:opacity-50 disabled:-bg--color-grey-200 ${false ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 outline-none disabled:opacity-50 disabled:-bg--color-grey-200 ${false ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
           value={email} disabled
         />
       </FormRow>
       <FormRow label="Full name">
         <input
-          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:opacity-50 disabled:-bg--color-grey-200 ${false ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          className={`bg-transparent w-full border-2 rounded-lg py-2 px-4 outline-none disabled:opacity-50 disabled:-bg--color-grey-200 ${false ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
 
           type="text"
           value={fullName}

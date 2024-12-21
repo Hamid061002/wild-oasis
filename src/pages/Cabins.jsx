@@ -8,8 +8,8 @@ import CabinTableOperations from "../features/cabins/CabinTableOperations";
 
 function Cabins() {
   return (
-    <div className="flex flex-col gap-10">
-      <div className="flex justify-between items-center -text--color-grey-700" type="horizontal">
+    <div className="flex flex-col gap-10 -text--color-grey-700">
+      <div className="flex justify-between items-center" type="horizontal">
         <h1 className="text-4xl">All cabins</h1>
         <CabinTableOperations />
       </div>

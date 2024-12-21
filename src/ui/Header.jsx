@@ -12,9 +12,8 @@ const Header = () => {
     <div className='flex justify-between p-[1.2rem_4.4rem]'>
       <StyledUserAvatar>
         <Avatar src={avatar || 'default-user.jpg'} alt={`Avatar of ${fullName}`} />
-        <span>{fullName}</span>
+        <span className='-text--color-grey-700'>{fullName}</span>
       </StyledUserAvatar>
-      {/* <Logout /> */}
       <HeaderMenu />
     </div>
   )

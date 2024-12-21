@@ -63,7 +63,7 @@ function CheckinBooking() {
   if (isLoading || isLoadingSetting) return <Spinner />
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 -text--color-grey-700">
       <div className="flex justify-between">
         <h1 className="text-4xl">Check in booking #{bookingId}</h1>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>

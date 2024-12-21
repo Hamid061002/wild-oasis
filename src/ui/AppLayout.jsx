@@ -5,7 +5,7 @@ import Header from './Header'
 
 const AppLayout = () => {
   return (
-    <div className='grid h-screen max-w-screen-2xl mx-auto grid-rows-[auto_1fr] grid-cols-[376px_1fr] divide-x divide-y -divide--color-grey-100'>
+    <div className='grid h-screen max-w-screen-2xl mx-auto grid-rows-[auto_1fr] grid-cols-[376px_1fr] divide-x divide-y -divide--color-grey-100 -bg--color-grey-0'>
       <div className='row-span-2'>
         <SideBar />
       </div>

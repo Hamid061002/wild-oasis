@@ -64,10 +64,9 @@ export async function updateUser({ fullName, password, avatar }) {
     throw new Error(error.message)
   }
 
+  const fileName = `avatar-${data.user.id}-${Math.random().toFixed(5) * 100000}`
+
   if (avatar) {
-
-    const fileName = `avatar-${data.user.id}`
-
     const { error: storageError } = await supabase
       .storage
       .from('avatars')

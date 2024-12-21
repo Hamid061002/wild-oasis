@@ -8,7 +8,7 @@ function Dashboard() {
   useBookings()
 
   return (
-    <div>
+    <div className="-text--color-grey-700">
       Dashboard
       {/* <Row type="horizontal">
       <Heading as="h1">Dashboard</Heading>
