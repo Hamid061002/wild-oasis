@@ -75,7 +75,7 @@ export default function CabinRow({ cabin }) {
               </Menus.Button>
 
               <Menus.Button>
-                <Modal.Open opens='edit-cabin'>
+                <Modal.Open opens='delete-cabin'>
                   <button
                     className="flex items-center gap-1 w-full -bg--color-red-700 px-4 py-1 rounded-md text-white hover:-bg--color-red-800 transitionOptimazed"
                   ><HiMiniTrash />Delete</button>
@@ -87,7 +87,7 @@ export default function CabinRow({ cabin }) {
               <ConfirmDelete disabled={isDeleting} resourceName={`cabin ${name}`} onConfirm={() => deleteCabinFn(cabinId)} />
             </Modal.Window>
 
-            <Modal.Window name='delete-cabin'>
+            <Modal.Window name='edit-cabin'>
               <CreateCabinForm cabinToEdit={cabin} />
             </Modal.Window>
 

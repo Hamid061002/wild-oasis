@@ -51,7 +51,7 @@ export default function Filter({ filterField, options }) {
       {
         options.map(option =>
           <FilterButton
-            key={option}
+            key={option.value}
             onClick={() => handleClickFilter(option.value)}
             active={option.value == currentFilter}
             disabled={option.value == currentFilter}

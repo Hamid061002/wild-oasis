@@ -13,7 +13,6 @@ function CreateCabinForm({ onCloseModal, cabinToEdit = {} }) {
   const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {}
   })
-
   const { errors } = formState
 
   const { createCabinFn, isCreating } = useCreateCabin()

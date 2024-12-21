@@ -1,38 +1,112 @@
-import Button from "../../ui/Button";
+import { useForm } from "react-hook-form";
 import Form from "../../ui/Form";
-import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
+import useSignup from "./useSignup";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 // Email regex: /\S+@\S+\.\S+/
 
 function SignupForm() {
+  const { register, getValues, handleSubmit, formState, reset } = useForm()
+  const { errors } = formState
+
+  const { signupFn, isSigningUp } = useSignup()
+
+  function handleSubmitFn(data) {
+    const { fullName, email, password } = data
+    signupFn({ fullName, email, password }, {
+      onSettled: reset
+    })
+  }
+
   return (
-    <Form>
-      <FormRow label="Full name" error={""}>
-        <Input type="text" id="fullName" />
-      </FormRow>
+    <Form onSubmit={handleSubmit(handleSubmitFn)}>
+      <FormRowSignUp label="Full name" error={errors?.fullName}>
+        <input
+          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.fullName ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          type="text"
+          {...register('fullName', {
+            required: 'This field is required!'
+          })}
+          disabled={isSigningUp}
+          id="fullName"
+        />
+      </FormRowSignUp>
 
-      <FormRow label="Email address" error={""}>
-        <Input type="email" id="email" />
-      </FormRow>
+      <FormRowSignUp label="Email address" error={errors?.email}>
+        <input
+          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.email ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          type="email"
+          {...register('email', {
+            required: 'This field is required!',
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: 'Email address is invalid!'
+            }
+          })}
+          disabled={isSigningUp}
+          id="email"
+        />
+      </FormRowSignUp>
 
-      <FormRow label="Password (min 8 characters)" error={""}>
-        <Input type="password" id="password" />
-      </FormRow>
+      <FormRowSignUp label="Password (min 8 characters)" error={errors?.password}>
+        <input
+          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.password ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          type="password"
+          {...register('password', {
+            required: 'This field is required!',
+            minLength: {
+              value: 8,
+              message: 'Password should be at least 8 characters!'
+            }
+          })}
+          disabled={isSigningUp}
+          id="password"
+        />
+      </FormRowSignUp>
 
-      <FormRow label="Repeat password" error={""}>
-        <Input type="password" id="passwordConfirm" />
-      </FormRow>
+      <FormRowSignUp label="Repeat password" error={errors?.passwordConfirm}>
+        <input
+          className={`w-full border-2 rounded-lg py-2 px-4 outline-none disabled:-bg--color-grey-200 ${errors?.passwordConfirm ? 'border-red-600 text-red-600' : '-border--color-grey-200'}`}
+          type="password"
+          {...register('passwordConfirm', {
+            required: 'This field is required!',
+            validate: (value) => value === getValues().password || 'Confirm password is incorrect!'
+          })}
+          disabled={isSigningUp}
+          id="passwordConfirm"
+        />
+      </FormRowSignUp>
 
-      <FormRow>
+      <div className="flex gap-2 justify-end mt-5">
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <button
+          disabled={isSigningUp}
+          onClick={() => reset()}
+          className="rounded-lg px-5 py-3 -text--color-grey-600 border-2 -border--color-grey-200 hover:-bg--color-grey-50 disabled:opacity-70"
+        >
           Cancel
-        </Button>
-        <Button>Create new user</Button>
-      </FormRow>
+        </button>
+        <button
+          disabled={isSigningUp}
+          className='flex justify-center items-center rounded-lg h-14 px-5 -text--color-brand-50 -bg--color-brand-600 hover:-bg--color-brand-700 disabled:opacity-70'
+        >
+          {
+            isSigningUp ? <SpinnerMini /> : 'Create new user'
+          }
+        </button>
+      </div>
     </Form>
   );
 }
 
 export default SignupForm;
+
+function FormRowSignUp({ label, error, children }) {
+  return (
+    <div className="grid grid-cols-[1fr_1fr_250px] items-center gap-2 py-4">
+      <label htmlFor={children.props?.id}>{label}</label>
+      {children}
+      {error && <p className="self-start flex-none w-full px-3 py-1 rounded-md text-sm -text--color-red-700 -bg--color-red-100 border">{error.message}</p>}
+    </div>
+  )
+}
