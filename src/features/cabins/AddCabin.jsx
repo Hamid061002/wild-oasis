@@ -16,19 +16,3 @@ export default function AddCabin() {
     </Modal>
   )
 }
-
-// export default function AddCabin() {
-//   const [isOpenModal, setIsOpenModal] = useState(false)
-
-//   return (
-//     <>
-//       <button
-//         onClick={() => setIsOpenModal(e => !e)}
-//         className="self-start rounded-lg px-8 py-2 -bg--color-brand-600 hover:-bg--color-brand-700 transition-all -text--color-brand-50 text-lg"
-//       >{isOpenModal ? 'Hide form' : 'Add new cabin'}</button>
-//       {
-//         isOpenModal && <Modal onClose={() => setIsOpenModal(false)}><CreateCabinForm onCloseModal={setIsOpenModal} /></Modal>
-//       }
-//     </>
-//   )
-// }

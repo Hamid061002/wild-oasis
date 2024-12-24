@@ -17,12 +17,6 @@ import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useDeleteBooking from "./useDeleteBooking";
 
-// const HeadingGroup = styled.div`
-//   display: flex;
-//   gap: 2.4rem;
-//   align-items: center;
-// `;
-
 function BookingDetail() {
   const { booking = {}, error, isLoading } = useBooking()
   const { deleteBookingFn, isDeletingBooknig } = useDeleteBooking()

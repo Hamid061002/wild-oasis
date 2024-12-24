@@ -1,5 +1,3 @@
-// import styled from "styled-components";
-
 import LoginForm from "../features/authentication/LoginForm";
 import Logo from "../ui/Logo";
 

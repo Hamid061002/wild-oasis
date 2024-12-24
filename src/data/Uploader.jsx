@@ -7,6 +7,7 @@ import { subtractDates } from "../utils/helpers";
 import { bookings } from "./data-bookings";
 import { cabins } from "./data-cabins";
 import { guests } from "./data-guests";
+import Spinner from "../ui/Spinner";
 
 // const originalSettings = {
 //   minBookingLength: 3,
@@ -94,8 +95,6 @@ async function createBookings() {
     };
   });
 
-  console.log(finalBookings);
-
   const { error } = await supabase.from("bookings").insert(finalBookings).select()
   if (error) {
     console.log(error.message);
@@ -133,23 +132,26 @@ function Uploader() {
       style={{
         marginTop: "auto",
         backgroundColor: "#e0e7ff",
-        padding: "8px",
+        padding: "4px",
+        margin: '0px',
         borderRadius: "5px",
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
-        gap: "8px",
+        gap: "4px",
       }}
     >
-      <h3>SAMPLE DATA</h3>
+      <h3 className="text-sm">SAMPLE DATA</h3>
 
-      <button onClick={uploadAll} disabled={isLoading}>
-        Upload ALL
-      </button>
+      <div className="flex gap-1">
+        <button className='grow rounded-lg text-center px-2 py-1 -text--color-brand-50 -bg--color-brand-600 hover:-bg--color-brand-700 text-xs' onClick={uploadAll} disabled={isLoading}>
+          Upload ALL
+        </button >
 
-      <Button onClick={uploadBookings} disabled={isLoading}>
-        Upload bookings ONLY
-      </Button>
+        <button className='grow rounded-lg text-center px-2 py-1 -text--color-brand-50 -bg--color-brand-600 hover:-bg--color-brand-700 text-xs' onClick={uploadBookings} disabled={isLoading}>
+          Upload bookings ONLY
+        </button >
+      </div>
     </div>
   );
 }

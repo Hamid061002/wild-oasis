@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 const sizes = {
   small: css`
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 0.4rem 0.8rem;
     text-transform: uppercase;
     font-weight: 600;
@@ -48,14 +48,18 @@ const variations = {
   `,
 };
 
-import React from 'react'
+const Button = styled.button`
+  border: none;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
 
-export default function Button({ children }) {
-  return (
-    <button>
-      {children}
-    </button>
-  )
-}
+  ${(props) => sizes[props.size]}
+  ${(props) => variations[props.variation]}
+`;
 
+Button.defaultProps = {
+  variation: "primary",
+  size: "medium",
+};
 
+export default Button;

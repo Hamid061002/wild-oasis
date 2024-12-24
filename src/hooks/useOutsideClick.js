@@ -6,7 +6,7 @@ export default function useOutsideClick(handler, listenCapturing = true, ignoreC
 
 
   function hanldeOutsideClick(e) {
-    if (ignoreCondition(e)) return;
+    // if (ignoreCondition(e)) return;
 
     if (ref.current && !ref.current.contains(e.target)) {
       handler()

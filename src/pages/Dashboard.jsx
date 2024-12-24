@@ -1,5 +1,7 @@
 import useBookings from "../features/bookings/useBookings";
 import useCabins from "../features/cabins/useCabins";
+import DashboardFilter from "../features/dashboard/DashboardFilter";
+import DashboardLayout from "../features/dashboard/DashboardLayout";
 import useSettings from "../features/settings/useSettings";
 
 function Dashboard() {
@@ -8,12 +10,12 @@ function Dashboard() {
   useBookings()
 
   return (
-    <div className="-text--color-grey-700">
-      Dashboard
-      {/* <Row type="horizontal">
-      <Heading as="h1">Dashboard</Heading>
-      <p>TEST</p>
-    </Row> */}
+    <div className="flex flex-col gap-10 -text--color-grey-700">
+      <div className="flex justify-between">
+        <h1 className="text-4xl">Dashboard</h1>
+        <DashboardFilter />
+      </div>
+      <DashboardLayout />
     </div>
   );
 }

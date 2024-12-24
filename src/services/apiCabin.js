@@ -23,7 +23,7 @@ function getNamePathImage(image) {
 
 export async function createCabin(newCabin) {
   const hasImagePath = Boolean(newCabin.image?.startsWith?.(supabaseUrl))
-  const imageName = `${newCabin.image.name}`.replaceAll('/', '')
+  const imageName = `${newCabin.image.name}-${Math.random().toFixed(5) * 1000000}`.replaceAll('/', '')
   const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`
 
   // A) CREATE
@@ -54,7 +54,7 @@ export async function createCabin(newCabin) {
 
     throw new Error('cabin image could not can be uploaded and the cabin was not created')
   }
-  
+
   return data
 }
 
@@ -66,7 +66,7 @@ export async function editCabin(newCabin, id) {
     .update({
       ...newCabin, image: imagePath
     }).eq('id', id).select().single()
-    
+
 
   if (editCabinError) {
     console.log(editCabinError.message);

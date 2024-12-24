@@ -15,7 +15,7 @@ export default function useCheckout() {
       const { id: bookingId } = data
       toast.success(`Booking #${bookingId} successfully checked out`)
       queryClient.invalidateQueries({ active: true })
-      navigate('/bookings')
+      navigate('/dashboard')
     },
 
     onError: error => {

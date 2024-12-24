@@ -64,31 +64,31 @@ export async function updateUser({ fullName, password, avatar }) {
     throw new Error(error.message)
   }
 
+  if (!avatar) return
+
   const fileName = `avatar-${data.user.id}-${Math.random().toFixed(5) * 100000}`
 
-  if (avatar) {
-    const { error: storageError } = await supabase
-      .storage
-      .from('avatars')
-      .upload(fileName, avatar)
+  const { error: storageError } = await supabase
+    .storage
+    .from('avatars')
+    .upload(fileName, avatar)
 
-    if (storageError) {
-      console.error(storageError.message);
-      throw new Error(storageError.message)
-    }
-
-    const { data: updatedUser, error: error2 } = await supabase
-      .auth.updateUser({
-        data: {
-          avatar: `${supabaseUrl}/storage/v1/object/public/avatars/${fileName}`
-        }
-      })
-
-    if (error2) {
-      console.error(error2.message);
-      throw new Error(error2.message)
-    }
-
-    return updatedUser
+  if (storageError) {
+    console.error(storageError.message);
+    throw new Error(storageError.message)
   }
+
+  const { data: updatedUser, error: error2 } = await supabase
+    .auth.updateUser({
+      data: {
+        avatar: `${supabaseUrl}/storage/v1/object/public/avatars/${fileName}`
+      }
+    })
+
+  if (error2) {
+    console.error(error2.message);
+    throw new Error(error2.message)
+  }
+
+  return updatedUser
 }

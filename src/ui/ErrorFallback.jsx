@@ -29,3 +29,17 @@ const Box = styled.div`
     color: var(--color-grey-500);
   }
 `;
+
+import React from 'react'
+
+export default function ErrorFallback({ error, resetFn }) {
+  return (
+    <StyledErrorFallback>
+      <Box>
+        <h1 className="text-4xl -text--color-grey-700">Something went wrong!!</h1>
+        <p>{error.message}</p>
+        <button onClick={resetFn} className='rounded-lg text-center px-5 py-3 -text--color-brand-50 -bg--color-brand-600 hover:-bg--color-brand-700'>Try again</button>
+      </Box>
+    </StyledErrorFallback>
+  )
+}

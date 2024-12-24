@@ -1,7 +1,57 @@
 import styled from "styled-components";
+import { getStaysTodayActivity } from "../../services/apiBookings";
+import Spinner from "../../ui/Spinner";
+import TodayItem from "./TodayItem";
+import useTodayActivity from "./useTodayActivity";
 
-import Heading from "../../ui/Heading";
-import Row from "../../ui/Row";
+/* fake data */
+const fakeData = [
+  {
+    status: "unconfirmed",
+    guests: {
+      fullName: 'Jonatan Johansson',
+      countryFlag: 'https://flagcdn.com/gb.svg',
+      country: 'United Kingdom'
+    },
+    numNights: 2
+  },
+  {
+    status: "unconfirmed",
+    guests: {
+      fullName: 'Maria Gomez',
+      countryFlag: 'https://flagcdn.com/mx.svg',
+      country: 'Mexico'
+    },
+    numNights: 4
+  },
+  {
+    status: "checked-in",
+    guests: {
+      fullName: 'Fatima Ahmed',
+      countryFlag: 'https://flagcdn.com/pk.svg',
+      country: 'Pakistan'
+    },
+    numNights: 6
+  },
+  {
+    status: "unconfirmed",
+    guests: {
+      fullName: 'Maria Rodriguez',
+      countryFlag: 'https://flagcdn.com/es.svg',
+      country: 'Spain'
+    },
+    numNights: 2
+  },
+  {
+    status: "checked-in",
+    guests: {
+      fullName: 'Gabriel Silva',
+      countryFlag: 'https://flagcdn.com/br.svg',
+      country: 'Brazil'
+    },
+    numNights: 4
+  },
+]
 
 const StyledToday = styled.div`
   /* Box */
@@ -9,16 +59,16 @@ const StyledToday = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
 
-  padding: 3.2rem;
+  padding: 2.4rem;
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 2rem;
   grid-column: 1 / span 2;
   padding-top: 2.4rem;
 `;
 
 const TodayList = styled.ul`
-  overflow: scroll;
+  overflow-y: scroll;
   overflow-x: hidden;
 
   /* Removing scrollbars for webkit, firefox, and ms, respectively */
@@ -36,14 +86,29 @@ const NoActivity = styled.p`
   margin-top: 0.8rem;
 `;
 
-function Today() {
+function TodayActivity() {
+  /* real data */
+  const { activities, isLoading } = useTodayActivity()
+
   return (
     <StyledToday>
-      <Row type="horizontal">
-        <Heading as="h2">Today</Heading>
-      </Row>
+      <div type="horizontal">
+        <h2 className="text-2xl">Today</h2>
+      </div>
+
+      {
+        isLoading ?
+          <Spinner /> :
+          activities?.length > 0 ?
+            <TodayList>
+              {
+                activities?.map(activity => <TodayItem activity={activity} key={activity.id} />)
+              }
+            </TodayList> :
+            <NoActivity>No activity today...</NoActivity>
+      }
     </StyledToday>
   );
 }
 
-export default Today;
+export default TodayActivity;

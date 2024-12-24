@@ -7,22 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import Pagination from "../../ui/Pagination";
 
 function BookingTable() {
-  const { bookings, error, isLoading, count } = useBookings()
-  // const [searchParams] = useSearchParams()
-  // const filterValue = searchParams.get('status') || 'all'
-  // let filteredBookings
-  // if (filterValue == 'all') filteredBookings = bookings
-  // if (filterValue == 'checked-out') filteredBookings = bookings?.filter(booking => booking.status == 'checked-out')
-  // if (filterValue == 'checked-in') filteredBookings = bookings?.filter(booking => booking.status == 'checked-in')
-  // if (filterValue == 'unconfirmed') filteredBookings = bookings?.filter(booking => booking.status == 'unconfirmed')
-
-
-  // let sortValue = searchParams.get('sort-by') || ''
-  // const isAscending = sortValue.includes('asc')
-  // sortValue = isAscending ? sortValue.replace('-asc', '') : sortValue.replace('-desc', '')
-  // const sortedBookings = filteredBookings?.sort((a, b) => isAscending ? a[sortValue] - b[sortValue] : b[sortValue] - a[sortValue])
-
-
+  const { bookings, isLoading, count } = useBookings()
 
   if (isLoading) return <Spinner />
 
