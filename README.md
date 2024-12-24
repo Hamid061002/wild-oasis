@@ -1,4 +1,4 @@
-The Wild Oasis 
+# The Wild Oasis 
 
 Technologies used in this project: Vite, supabase, react-query, react-hook-form, react-router-dom, Tailwindcss, styled-components
 
