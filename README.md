@@ -8,6 +8,6 @@ Technologies used in this project: Vite, supabase, react-query, react-hook-form,
 
 run applicaition :
 ```
-- npm i
-- npm run dev
+$ npm i
+$ npm run dev
 ```
