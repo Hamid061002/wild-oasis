@@ -1,8 +1,10 @@
-# React + Vite
+# The Wild Oasis 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Technologies used in this project: Vite, supabase, react-query, react-hook-form, react-router-dom, Tailwindcss, styled-components
 
-Currently, two official plugins are available:
+![Screenshot 2024-12-24 115128](https://github.com/user-attachments/assets/61dcf485-d0e1-423d-ba73-c383616a4634)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+run applicaition :
+- npm i
+- npm run dev
