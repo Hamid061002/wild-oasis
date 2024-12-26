@@ -6,7 +6,7 @@ import Uploader from '../data/Uploader'
 
 const AppLayout = () => {
   return (
-    <div className='grid grid-cols-[366px_1fr] grid-rows-[auto_1fr] h-screen max-w-screen-2xl mx-auto divide-x divide-y -divide--color-grey-100 -bg--color-grey-0'>
+    <div className='grid grid-cols-[366px_1fr] grid-rows-[auto_1fr] h-screen max-w-screen-[1950px] mx-auto divide-x divide-y -divide--color-grey-100 -bg--color-grey-0'>
       <div className='row-span-2 relative'>
         <SideBar />
         <div className='fixed bottom-1 left-1 w-[250px]'>
