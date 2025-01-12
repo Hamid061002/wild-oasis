@@ -192,10 +192,10 @@ export default function DurationChart({ confirmedStays }) {
             data={data}
             nameKey='duration'
             dataKey='value'
-            cx='45%'
+            cx='47%'
             cy='50%'
-            innerRadius={80}
-            outerRadius={110}
+            innerRadius={70}
+            outerRadius={100}
             paddingAngle={3}
           >
             {startDataLight.map(entry => <Cell
