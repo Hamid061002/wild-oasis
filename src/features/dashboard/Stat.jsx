@@ -6,11 +6,11 @@ const StyledStat = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
 
-  padding: 1.1rem;
+  padding: 1.1rem 0.8rem;
   display: grid;
   grid-template-columns: 3.5rem 1fr;
   grid-template-rows: auto auto;
-  column-gap: 1.2rem;
+  column-gap: 0.8rem;
   row-gap: 0.3rem;
 `;
 
@@ -39,7 +39,7 @@ const Title = styled.h5`
   letter-spacing: 0.4px;
   font-weight: 600;
   color: var(--color-grey-500);
-  /* text-wrap: nowrap; */
+  text-wrap: nowrap;
 `;
 
 const Value = styled.p`

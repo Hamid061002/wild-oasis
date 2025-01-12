@@ -17,7 +17,7 @@ export default function DashboardLayout() {
   if (isLoadingBookings || isLoadingStays || isLoadingCabins) return <Spinner />
 
   return (
-    <div className="grid grid-cols-[auto_7fr_4fr_auto] grid-rows-[auto_24rem_auto] gap-7">
+    <div className="grid grid-cols-[auto_7fr_4fr_auto] grid-rows-[auto_24rem_auto] gap-6">
       <Stats
         bookings={bookings}
         confirmedStays={confirmedStays}
